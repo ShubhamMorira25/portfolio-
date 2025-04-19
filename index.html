@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional portfolio of Shubham Morira - Web Developer, Designer & Video Editor">
+  <title>Shubham Morira | Portfolio</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --light-gray: #e2e8f0;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+    
+    body.dark-mode {
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 0;
+      background-color: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .dark-mode header {
+      background-color: rgba(15, 23, 42, 0.95);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .dark-mode .nav-links a {
+      color: var(--light);
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+    
+    .dark-mode .theme-toggle {
+      color: var(--light);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+    }
+    
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    
+    .hero-text {
+      flex: 1;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .profile-pic {
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero p.subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+    
+    .dark-mode .hero p.subtitle {
+      color: var(--light-gray);
+    }
+    
+    .hero .location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    /* About Section */
+    .section {
+      padding: 6rem 0;
+    }
+    
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .about-content p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    /* Skills */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    
+    .skill-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow);
+      width: 160px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .dark-mode .skill-card {
+      background-color: #1e293b;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .skill-name {
+      font-weight: 600;
+    }
+    
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .service-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .dark-mode .service-card {
+      background-color: #1e293b;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    /* Contact */
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .form-group label {
+      font-weight: 500;
+    }
+    
+    .form-control {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--light-gray);
+      border-radius: 0.5rem;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    
+    .dark-mode .form-control {
+      background-color: #1e293b;
+      border-color: #334155;
+      color: white;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    
+    .dark-mode footer {
+      background-color: #020617;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .social-link {
+      color: white;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+    
+    .social-link:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      color: var(--light-gray);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+      
+      .profile-pic {
+        width: 250px;
+        height: 250px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero {
+        padding-top: 6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">Shubham Morira</a>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Hi, I'm <span class="text-primary">Shubham Morira</span></h1>
+          <p class="subtitle">Web Developer | Graphic Designer | Video Editor</p>
+          <p class="location">
+            <i class="fas fa-map-marker-alt"></i> From Pakistan
+          </p>
+          <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Hire Me
+            </a>
+            <a href="#about" class="btn btn-outline">
+              <i class="fas fa-user"></i> About Me
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="assests/picture3.png" alt="Shubham Morira" class="profile-pic">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>
+          I'm Shubham Morira, a certified professional in Information Technology (C.I.T), 
+          Graphic Design, and Video Editing from Times Tech Computer Center. 
+          With expertise in HTML, CSS, and JavaScript, I'm currently expanding my skills in C++.
+        </p>
+        <p>
+          As a dedicated and creative web developer, I combine technical knowledge with artistic vision. 
+          I'm passionate about learning new technologies, solving complex problems, and growing both 
+          personally and professionally in the tech industry.
+        </p>
+      </div>
+      
+      <div class="skills-container">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fab fa-html5"></i>
+          </div>
+          <h3 class="skill-name">HTML</h3>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fab fa-css3-alt"></i>
+          </div>
+          <h3 class="skill-name">CSS</h3>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fab fa-js"></i>
+          </div>
+          <h3 class="skill-name">JavaScript</h3>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h3 class="skill-name">Graphic Design</h3>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3 class="skill-name">Video Editing</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section bg-light">
+    <div class="container">
+      <h2 class="section-title">My Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Web Development</h3>
+          <p>
+            I build responsive, modern websites with clean code and excellent performance. 
+            From simple landing pages to complex web applications, I deliver solutions that 
+            meet your business needs.
+          </p>
+        </div>
+        <div class="service-card">
+          <h3>Graphic Design</h3>
+          <p>
+            I create visually compelling graphics that help brands establish their identity. 
+            From logos to marketing materials, I focus on clean design principles and strong 
+            visual communication.
+          </p>
+        </div>
+        <div class="service-card">
+          <h3>Video Editing</h3>
+          <p>
+            I craft engaging video content that tells compelling stories. My editing style 
+            features clean cuts, smooth transitions, and creative elements to capture 
+            audience attention.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h3>Email</h3>
+              <a href="mailto:shubhamrajmorira082@gmail.com">shubhamrajmorira082@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <h3>Phone</h3>
+              <a href="tel:+92 3013419186">+92 3013419186</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h3>Location</h3>
+              <p>Karachi, Pakistan</p>
+            </div>
+          </div>
+        </div>
+        
+        <form class="contact-form" netlify>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" class="form-control" placeholder="Enter your message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://www.facebook.com/share/16J6whorp4/" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/morirashubham?igsh=ZXRtZnhraXUzNGhp" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/ShubhamMorira25" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <p class="copyright">&copy; <span id="year"></span> Shubham Morira. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark mode toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+    
+    // Update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
