@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Professional portfolio of Shubham Morira - Web Developer, Designer & Video Editor">
-  <title>Shubham Morira | Portfolio</title>
+  <title>Shubham | Portfolio</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +39,23 @@
       background-color: var(--light);
       line-height: 1.6;
       transition: var(--transition);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+    
+    .dark-mode .bg-animation {
+      opacity: 0.05;
     }
     
     body.dark-mode {
@@ -467,6 +484,11 @@
   </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <canvas id="canvas"></canvas>
+  </div>
+
   <!-- Header -->
   <header>
     <div class="container">
@@ -608,7 +630,7 @@
             </div>
             <div>
               <h3>Email</h3>
-              <a href="mailto:shubhamrajmorira082@gmail.com">shubhamrajmorira082@gmail.com</a>
+              <a href="mailto:shubhamrajmorira083@gmail.com">shubhamrajmorira083@gmail.com</a>
             </div>
           </div>
           <div class="contact-item">
@@ -631,18 +653,18 @@
           </div>
         </div>
         
-        <form class="contact-form" netlify>
+        <form class="contact-form" action="https://formspree.io/f/shubhamrajmorira083@gmail.com" method="POST">
           <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
           </div>
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
           </div>
           <div class="form-group">
             <label for="message">Your Message</label>
-            <textarea id="message" class="form-control" placeholder="Enter your message" required></textarea>
+            <textarea id="message" name="message" class="form-control" placeholder="Enter your message" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i> Send Message
@@ -714,6 +736,100 @@
             behavior: 'smooth'
           });
         }
+      });
+    });
+
+    // Animated Background
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = window.innerWidth < 768 ? 30 : 60;
+    
+    // Particle class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.5)' : 'rgba(37, 99, 235, 0.5)';
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x > canvas.width || this.x < 0) {
+          this.speedX = -this.speedX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+          this.speedY = -this.speedY;
+        }
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    // Create particles
+    function init() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        // Connect particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.strokeStyle = body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.1)' : 'rgba(37, 99, 235, 0.1)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    // Initialize and start animation
+    init();
+    animate();
+    
+    // Update particles when theme changes
+    themeToggle.addEventListener('click', () => {
+      const newColor = body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.5)' : 'rgba(37, 99, 235, 0.5)';
+      particles.forEach(particle => {
+        particle.color = newColor;
       });
     });
   </script>
